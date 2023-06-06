@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    background-color: black;
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+.result {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 0 20px rgb(26, 24, 24);
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    top: -12px;
+    left: -12px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    animation: 0.8s down;
+    z-index: 99;
+}
+
+.content {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 25px;
+    font-size: 80px;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 0;
+    font-size: 40px;
+}
+
+button {
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+    width: 200px;
+    height: 90px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgb(26, 24, 24);
+    font-weight: bold;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+.game {
+    height: 500px;
+    width: 500px;
+    position: relative;
+}
+
+.game-squares {
+    display: grid;
+    height: 100%;
+    margin: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+}
+
+.square {
+    border: 1px solid whitesmoke;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.x {
+    width: 12px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    height: 0%;
+    animation: 0.5s forwards x-animation;
+}
+
+.first {
+    transform: rotate(28deg);
+}
+
+.second {
+    transform: rotate(-28deg);
+}
+
+.o {
+    height: calc(100% - 25px);
+    background-color: transparent;
+    width: 100%;
+    border: 12px solid transparent;
+    border-radius: 50%;
+    animation: 0.5s forwards o-animation;
+}
+
+@keyframes x-animation {
+    100% {
+        height: 100%;
+    }
+}
+
+@keyframes o-animation {
+    25% {
+        border-top-color: whitesmoke;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    }
+    50% {
+        border-top-color: whitesmoke;
+        border-right-color: whitesmoke;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    }
+    75% {
+        border-top-color: whitesmoke;
+        border-right-color: whitesmoke;
+        border-bottom-color: whitesmoke;
+        border-left-color: transparent;
+    }
+    100% {
+        border-color: whitesmoke;
+    }
+}
+
+@keyframes shake-animation {
+    0% {
+        transform: translate(2px, 0);
+    }
+    100% {
+        transform: translate(-2px, 0);
+    }
+}
+
+@keyframes down {
+    0% {
+        transform: translate(0, -100%);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes up {
+    100% {
+        transform: translate(0, -200%);
+    }
+}
