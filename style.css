@@ -1,6 +1,7 @@
 :root {
     --o-color: #ff5722;
     --x-color: #009688;
+    --tie-color: #ffeb3b;
 }
 
 body {
@@ -129,11 +130,15 @@ button:hover {
     width: 100%;
     border: 12px solid transparent;
     border-radius: 50%;
-    animation: 0.5s forwards o-animation;
+    animation: 0.25s forwards o-animation;
 }
 
 .o-text {
     color: var(--o-color);
+}
+
+.tie-text {
+    color: var(--tie-color);
 }
 
 @media (max-width: 539px) {

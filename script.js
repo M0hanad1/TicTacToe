@@ -14,7 +14,12 @@ const winPositions = [
     [0, 4, 8],
     [2, 4, 6], // 3
 ];
-const info = document.querySelector("h1");
+const score = {
+    x: document.getElementById("x"),
+    o: document.getElementById("o"),
+    tie: document.getElementById("tie"),
+};
+const turn = document.querySelector(".turn");
 const game = document.querySelector(".game-squares");
 const result = document.querySelector(".result");
 const resultText = result.firstElementChild.firstElementChild;
@@ -31,7 +36,15 @@ function createGame() {
         squares.push(square);
         game.appendChild(square);
     }
-    info.innerHTML = "It's player <span class='x-text'>X</span>'s turn!";
+    turn.innerHTML = "It's player <span class='x-text'>X</span>'s turn!";
+    updateScore();
+}
+
+function updateScore() {
+    Object.entries(score).forEach((value) => {
+        if (!localStorage.getItem(value[0])) localStorage.setItem(value[0], 0);
+        value[1].textContent = localStorage.getItem(value[0]);
+    });
 }
 
 function playAgain() {
@@ -49,30 +62,31 @@ function playAgain() {
     createGame();
 }
 
-function getResult(text) {
-    info.innerHTML = "Game Ended";
+function getResult(text, scoreAdd) {
+    turn.innerHTML = "Game Ended";
     resultText.innerHTML = text;
     result.style.display = "flex";
+    localStorage.setItem(scoreAdd, +localStorage.getItem(scoreAdd) + 1);
+    updateScore();
     gameEnded = true;
 }
 
 function checkGame() {
     winPositions.forEach((position) => {
         let currentPositions = [];
-        position.forEach((value) => {
-            currentPositions.push(
-                squares[value].innerHTML
-                    ? squares[value].getAttribute("player")
-                    : null
-            );
-        });
+        // prettier-ignore
+        position.forEach((value) =>
+            currentPositions.push(squares[value].innerHTML ? squares[value].getAttribute("player") : null)
+        );
         if (currentPositions.every((value) => value === currentPlayer))
             return getResult(
-                `Player <span class=${currentPlayer}-text>${currentPlayer}</span> won!`
+                `Player <span class=${currentPlayer}-text>${currentPlayer}</span> won!`,
+                currentPlayer
             );
     });
     tieCounter += 1;
-    if (tieCounter === 9 && !gameEnded) return getResult("It's a tie!");
+    // prettier-ignore
+    if (tieCounter === 9 && !gameEnded) return getResult("It's a <span class='tie-text'>tie</span>!", "tie");
 }
 
 function squareClick(event) {
@@ -92,7 +106,7 @@ function squareClick(event) {
     checkGame();
     if (gameEnded) return;
     currentPlayer = currentPlayer === "o" ? "x" : "o";
-    info.innerHTML = `It's player <span class=${currentPlayer}-text>${currentPlayer}</span>'s turn!`;
+    turn.innerHTML = `It's player <span class=${currentPlayer}-text>${currentPlayer}</span>'s turn!`;
 }
 
 createGame();
