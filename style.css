@@ -1,3 +1,8 @@
+:root {
+    --o-color: #ff5722;
+    --x-color: #009688;
+}
+
 body {
     margin: 0;
     background-color: black;
@@ -6,9 +11,17 @@ body {
     height: 100dvh;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     color: whitesmoke;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
+    gap: 35px;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
 }
 
 .result {
@@ -72,16 +85,17 @@ button:hover {
 
 .game-squares {
     display: grid;
+    background-color: #181818;
     height: 100%;
     margin: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    border: 1px solid whitesmoke;
+    border: 3px solid black;
     border-radius: 5px;
 }
 
 .square {
-    border: 1px solid whitesmoke;
+    border: 3px solid black;
     position: relative;
     display: flex;
     justify-content: center;
@@ -92,9 +106,13 @@ button:hover {
 .x {
     width: 12px;
     border-radius: 8px;
-    background-color: whitesmoke;
+    background-color: var(--x-color);
     height: 0%;
     animation: 0.5s forwards x-animation;
+}
+
+.x-text {
+    color: var(--x-color);
 }
 
 .first {
@@ -114,6 +132,62 @@ button:hover {
     animation: 0.5s forwards o-animation;
 }
 
+.o-text {
+    color: var(--o-color);
+}
+
+@media (max-width: 539px) {
+    .game {
+        height: 400px;
+        width: 400px;
+    }
+    h2 {
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 429px) {
+    h1 {
+        font-size: 25px;
+    }
+    .game {
+        height: 300px;
+        width: 300px;
+    }
+    h2 {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+    p {
+        font-size: 20px;
+    }
+    button {
+        font-size: 20px;
+        width: 150px;
+        height: 60px;
+    }
+    .o {
+        border: 8px solid transparent;
+    }
+    .x {
+        width: 8px;
+    }
+}
+
+@media (max-width: 329px) {
+    h1 {
+        font-size: 20px;
+    }
+    .game {
+        height: 250px;
+        width: 250px;
+    }
+}
+
 @keyframes x-animation {
     100% {
         height: 100%;
@@ -122,29 +196,29 @@ button:hover {
 
 @keyframes o-animation {
     25% {
-        border-top-color: whitesmoke;
+        border-top-color: var(--o-color);
         border-right-color: transparent;
         border-bottom-color: transparent;
         border-left-color: transparent;
     }
     50% {
-        border-top-color: whitesmoke;
-        border-right-color: whitesmoke;
+        border-top-color: var(--o-color);
+        border-right-color: var(--o-color);
         border-bottom-color: transparent;
         border-left-color: transparent;
     }
     75% {
-        border-top-color: whitesmoke;
-        border-right-color: whitesmoke;
-        border-bottom-color: whitesmoke;
+        border-top-color: var(--o-color);
+        border-right-color: var(--o-color);
+        border-bottom-color: var(--o-color);
         border-left-color: transparent;
     }
     100% {
-        border-color: whitesmoke;
+        border-color: var(--o-color);
     }
 }
 
-@keyframes shake-animation {
+@keyframes shake {
     0% {
         transform: translate(2px, 0);
     }
