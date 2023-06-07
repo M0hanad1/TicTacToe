@@ -6,4 +6,4 @@
 
 ## **Example**
 
-[![Example](./examples/image.png)](./examples/video.webm)
+[![Example](./examples/image.png)](./examples/video.mp4)
