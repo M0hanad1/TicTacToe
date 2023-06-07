@@ -102,6 +102,8 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .x {

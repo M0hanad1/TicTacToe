@@ -32,7 +32,13 @@ function createGame() {
         square.style.animation;
         square.className = "square";
         square.setAttribute("player", null);
-        square.addEventListener("click", squareClick);
+        square.onclick = squareClick;
+        // prettier-ignore
+        square.onmouseenter = () => {
+            if (square.style.cursor !== "default")
+                square.style.backgroundColor = getComputedStyle(document.body).getPropertyValue(`--${currentPlayer}-color`);
+        };
+        square.onmouseleave = () => (square.style.backgroundColor = "#181818");
         squares.push(square);
         game.appendChild(square);
     }
@@ -98,10 +104,12 @@ function squareClick(event) {
         return;
     }
 
+    event.currentTarget.style.backgroundColor = "#181818";
     event.currentTarget.innerHTML =
         currentPlayer === "x"
             ? `<span class="x first"></span><span class="x second"></span>`
             : `<span class="o"></span>`;
+    event.currentTarget.style.cursor = "default";
     event.currentTarget.setAttribute("player", currentPlayer);
     checkGame();
     if (gameEnded) return;
