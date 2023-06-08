@@ -71,7 +71,8 @@ function updateScore() {
 }
 
 function resetScore() {
-    new Audio(audioPath + "reset.mp3").play();
+    const audio = new Audio(audioPath + "reset.mp3");
+    audio.play();
     Object.values(scoreSession).forEach((value) => (value.textContent = "0"));
     localStorage.clear();
     updateScore();
@@ -94,17 +95,19 @@ function resetGame() {
 }
 
 function playAgain() {
-    new Audio(audioPath + "start.mp3").play();
+    const audio = new Audio(audioPath + "start.mp3");
+    audio.play();
     resetGame();
     createGame();
 }
 
 function getResult(text, scoreAdd) {
     if (scoreAdd === "tie") {
-        new Audio(audioPath + "tie.mp3").play();
+        var audio = new Audio(audioPath + "tie.mp3");
     } else {
-        new Audio(audioPath + "win.mp3").play();
+        var audio = new Audio(audioPath + "win.mp3");
     }
+    audio.play();
     turn.innerHTML = "Game Ended!";
     resultText.innerHTML = text;
     result.style.display = "flex";
@@ -144,7 +147,8 @@ function squareClick(event) {
     }
 
     event.currentTarget.style.backgroundColor = "#181818";
-    new Audio(audioPath + currentPlayer + ".mp3").play();
+    const audio = new Audio(audioPath + currentPlayer + ".mp3");
+    audio.play();
     event.currentTarget.innerHTML =
         currentPlayer === "x"
             ? `<span class="x first"></span><span class="x second"></span>`
