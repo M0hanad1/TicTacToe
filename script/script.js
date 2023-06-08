@@ -5,7 +5,15 @@ let currentPlayer = "x";
 let tieCounter = 0;
 let gameEnded = false;
 // prettier-ignore
-const audioPath = "https://github.com/M0hanad1/TicTacToe/raw/main/assets/sounds/";
+const soundsPath = "https://github.com/M0hanad1/TicTacToe/raw/main/assets/sounds/";
+const sounds = {
+    x: new Audio(soundsPath + "x.mp3"),
+    o: new Audio(soundsPath + "o.mp3"),
+    win: new Audio(soundsPath + "win.mp3"),
+    tie: new Audio(soundsPath + "tie.mp3"),
+    reset: new Audio(soundsPath + "reset.mp3"),
+    start: new Audio(soundsPath + "start.mp3"),
+};
 const winPositions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -72,7 +80,7 @@ function updateScore() {
 }
 
 function resetScore() {
-    new Audio(audioPath + "reset.mp3").play();
+    sounds.reset.play();
     Object.values(scoreSession).forEach((value) => (value.textContent = "0"));
     localStorage.clear();
     updateScore();
@@ -95,17 +103,13 @@ function resetGame() {
 }
 
 function playAgain() {
-    new Audio(audioPath + "start.mp3").play();
+    sounds.start.play();
     resetGame();
     createGame();
 }
 
 function getResult(text, scoreAdd) {
-    if (scoreAdd === "tie") {
-        new Audio(audioPath + "tie.mp3").play();
-    } else {
-        new Audio(audioPath + "win.mp3").play();
-    }
+    scoreAdd === "tie" ? sounds.tie.play() : sounds.win.play();
     turn.innerHTML = "Game Ended!";
     resultText.innerHTML = text;
     result.style.display = "flex";
@@ -143,9 +147,8 @@ function squareClick(event) {
         setTimeout(() => target.style.animation = "", 500);
         return;
     }
-
     event.currentTarget.style.backgroundColor = "#181818";
-    new Audio(audioPath + currentPlayer + ".mp3").play();
+    sounds[currentPlayer].play();
     event.currentTarget.innerHTML =
         currentPlayer === "x"
             ? `<span class="x first"></span><span class="x second"></span>`
