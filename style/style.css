@@ -20,6 +20,11 @@ body {
 }
 
 h1 {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     text-transform: uppercase;
     text-align: center;
     margin: 0;
