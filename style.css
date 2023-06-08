@@ -49,6 +49,7 @@ h1 {
 }
 
 h2 {
+    margin: 0;
     margin-bottom: 25px;
     font-size: 80px;
     text-transform: uppercase;
@@ -59,23 +60,37 @@ p {
     font-size: 40px;
 }
 
+.buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 button {
     background-color: transparent;
     color: whitesmoke;
     border: none;
     width: 200px;
-    height: 90px;
+    text-align: center;
+    height: 80px;
     border-radius: 20px;
-    box-shadow: 0 0 20px rgb(26, 24, 24);
+    box-shadow: 0 0 5px rgb(26, 24, 24);
     font-weight: bold;
     font-size: 30px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-button:hover {
-    background-color: whitesmoke;
-    color: black;
+.again:hover {
+    background-color: #00599f;
+    box-shadow: none;
+}
+
+.reset:hover {
+    background-color: #6f0000;
+    box-shadow: none;
 }
 
 .game {
@@ -148,6 +163,14 @@ button:hover {
         height: 400px;
         width: 400px;
     }
+    .buttons {
+        gap: 10px;
+    }
+    button {
+        font-size: 25px;
+        width: 180px;
+        height: 70px;
+    }
     h2 {
         font-size: 60px;
         margin-bottom: 20px;
@@ -188,6 +211,15 @@ button:hover {
 @media (max-width: 329px) {
     h1 {
         font-size: 20px;
+    }
+    h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    button {
+        font-size: 18px;
+        width: 130px;
+        height: 50px;
     }
     .game {
         height: 250px;

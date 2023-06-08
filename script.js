@@ -22,9 +22,11 @@ const score = {
 const turn = document.querySelector(".turn");
 const game = document.querySelector(".game-squares");
 const result = document.querySelector(".result");
-const resultText = result.firstElementChild.firstElementChild;
-const replay = result.lastElementChild;
-replay.addEventListener("click", playAgain);
+const resultText = document.querySelector("h2");
+const replay = document.querySelector(".again");
+const reset = document.querySelector(".reset");
+replay.onclick = playAgain;
+reset.onclick = resetScore;
 
 function createGame() {
     for (let i = 0; i < 9; i++) {
@@ -51,6 +53,12 @@ function updateScore() {
         if (!localStorage.getItem(value[0])) localStorage.setItem(value[0], 0);
         value[1].textContent = localStorage.getItem(value[0]);
     });
+}
+
+function resetScore() {
+    localStorage.clear();
+    updateScore();
+    playAgain();
 }
 
 function playAgain() {
