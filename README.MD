@@ -8,6 +8,6 @@
 
 ## **Examples**
 
-<img src="./examples/image1.png" width="300px" height="400px" alt="Board Example">
-<img src="./examples/image2.png" width="300px" height="400px" alt="Tie Example">
-<img src="./examples/image3.png" width="300px" height="400px" alt="Winning Example">
+<img src="./assets/imgs/example1.png" width="300px" height="400px" alt="Board Example">
+<img src="./assets/imgs/example2.png" width="300px" height="400px" alt="Tie Example">
+<img src="./assets/imgs/example3.png" width="300px" height="400px" alt="Winning Example">

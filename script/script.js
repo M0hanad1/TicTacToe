@@ -4,6 +4,7 @@ let squares = [];
 let currentPlayer = "x";
 let tieCounter = 0;
 let gameEnded = false;
+const audioPath = "../assets/sounds/";
 const winPositions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -70,13 +71,15 @@ function updateScore() {
 }
 
 function resetScore() {
+    new Audio(audioPath + "reset.mp3").play();
     Object.values(scoreSession).forEach((value) => (value.textContent = "0"));
     localStorage.clear();
     updateScore();
-    playAgain();
+    resetGame();
+    createGame();
 }
 
-function playAgain() {
+function resetGame() {
     result.style.animation = "1.2s up";
     setTimeout(() => {
         result.style.display = "none";
@@ -88,11 +91,21 @@ function playAgain() {
     squares = [];
     tieCounter = 0;
     gameEnded = false;
+}
+
+function playAgain() {
+    new Audio(audioPath + "start.mp3").play();
+    resetGame();
     createGame();
 }
 
 function getResult(text, scoreAdd) {
-    turn.innerHTML = "Game Ended";
+    if (scoreAdd === "tie") {
+        new Audio(audioPath + "tie.mp3").play();
+    } else {
+        new Audio(audioPath + "win.mp3").play();
+    }
+    turn.innerHTML = "Game Ended!";
     resultText.innerHTML = text;
     result.style.display = "flex";
     // prettier-ignore
@@ -131,6 +144,7 @@ function squareClick(event) {
     }
 
     event.currentTarget.style.backgroundColor = "#181818";
+    new Audio(audioPath + currentPlayer + ".mp3").play();
     event.currentTarget.innerHTML =
         currentPlayer === "x"
             ? `<span class="x first"></span><span class="x second"></span>`
