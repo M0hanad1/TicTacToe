@@ -1,6 +1,6 @@
 # **TicTacToe**
 
--   Try out **[HERE](https://m0hanad1.github.io/Portfolio/)**.
+-   Try out **[HERE](https://m0hanad1.github.io/TicTacToe/)**.
 -   Simple TicTacToe game made with **`HTML`**, **`CSS`**, and **`JavaScript`**.
 -   The game contains some **`Animations`**, **`Effects`**, and **`Score System`**.
 -   The game supports **`Tab Navigation`**.
