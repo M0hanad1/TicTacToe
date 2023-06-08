@@ -14,10 +14,15 @@ const winPositions = [
     [0, 4, 8],
     [2, 4, 6], // 3
 ];
-const score = {
+const scoreStorage = {
     x: document.getElementById("x"),
     o: document.getElementById("o"),
     tie: document.getElementById("tie"),
+};
+const scoreSession = {
+    x: document.getElementById("x-session"),
+    o: document.getElementById("o-session"),
+    tie: document.getElementById("tie-session"),
 };
 const turn = document.querySelector(".turn");
 const game = document.querySelector(".game-squares");
@@ -29,18 +34,27 @@ replay.onclick = playAgain;
 reset.onclick = resetScore;
 
 function createGame() {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 1; i <= 9; i++) {
         const square = document.createElement("div");
         square.style.animation;
         square.className = "square";
-        square.setAttribute("player", null);
+        square.setAttribute("player", "");
+        square.tabIndex = i;
         square.onclick = squareClick;
+        square.onkeydown = (e) => {
+            if (e.key === "Enter") squareClick(e);
+            square.blur();
+        };
         // prettier-ignore
         square.onmouseenter = () => {
-            if (square.style.cursor !== "default")
+            if (square.style.cursor !== "default") {
                 square.style.backgroundColor = getComputedStyle(document.body).getPropertyValue(`--${currentPlayer}-color`);
+            }
         };
+        // prettier-ignore
+        square.onfocus = () => (square.style.backgroundColor = getComputedStyle(document.body).getPropertyValue(`--${currentPlayer}-color`));
         square.onmouseleave = () => (square.style.backgroundColor = "#181818");
+        square.onblur = () => (square.style.backgroundColor = "#181818");
         squares.push(square);
         game.appendChild(square);
     }
@@ -49,13 +63,14 @@ function createGame() {
 }
 
 function updateScore() {
-    Object.entries(score).forEach((value) => {
+    Object.entries(scoreStorage).forEach((value) => {
         if (!localStorage.getItem(value[0])) localStorage.setItem(value[0], 0);
         value[1].textContent = localStorage.getItem(value[0]);
     });
 }
 
 function resetScore() {
+    Object.values(scoreSession).forEach((value) => (value.textContent = "0"));
     localStorage.clear();
     updateScore();
     playAgain();
@@ -80,7 +95,10 @@ function getResult(text, scoreAdd) {
     turn.innerHTML = "Game Ended";
     resultText.innerHTML = text;
     result.style.display = "flex";
+    // prettier-ignore
+    scoreSession[scoreAdd].textContent = +scoreSession[scoreAdd].textContent + 1;
     localStorage.setItem(scoreAdd, +localStorage.getItem(scoreAdd) + 1);
+    squares.forEach((value) => (value.tabIndex = -1));
     updateScore();
     gameEnded = true;
 }
@@ -89,21 +107,21 @@ function checkGame() {
     winPositions.forEach((position) => {
         let currentPositions = [];
         // prettier-ignore
-        position.forEach((value) =>
-            currentPositions.push(squares[value].innerHTML ? squares[value].getAttribute("player") : null)
-        );
-        if (currentPositions.every((value) => value === currentPlayer))
+        position.forEach((value) => currentPositions.push(squares[value].getAttribute("player")));
+        if (currentPositions.every((value) => value === currentPlayer)) {
             return getResult(
                 `Player <span class=${currentPlayer}-text>${currentPlayer}</span> won!`,
                 currentPlayer
             );
+        }
     });
-    tieCounter += 1;
+    ++tieCounter;
     // prettier-ignore
     if (tieCounter === 9 && !gameEnded) return getResult("It's a <span class='tie-text'>tie</span>!", "tie");
 }
 
 function squareClick(event) {
+    if (gameEnded) return;
     // prettier-ignore
     if (event.currentTarget.innerHTML) {
         const target = !event.target.innerHTML ? event.target.parentElement : event.target;
@@ -119,6 +137,7 @@ function squareClick(event) {
             : `<span class="o"></span>`;
     event.currentTarget.style.cursor = "default";
     event.currentTarget.setAttribute("player", currentPlayer);
+    event.currentTarget.tabIndex = -1;
     checkGame();
     if (gameEnded) return;
     currentPlayer = currentPlayer === "o" ? "x" : "o";
