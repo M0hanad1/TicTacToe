@@ -4,7 +4,8 @@ let squares = [];
 let currentPlayer = "x";
 let tieCounter = 0;
 let gameEnded = false;
-const audioPath = "../assets/sounds/";
+// prettier-ignore
+const audioPath = "https://github.com/M0hanad1/TicTacToe/raw/main/assets/sounds/";
 const winPositions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -71,8 +72,7 @@ function updateScore() {
 }
 
 function resetScore() {
-    const audio = new Audio(audioPath + "reset.mp3");
-    audio.play();
+    new Audio(audioPath + "reset.mp3").play();
     Object.values(scoreSession).forEach((value) => (value.textContent = "0"));
     localStorage.clear();
     updateScore();
@@ -95,19 +95,17 @@ function resetGame() {
 }
 
 function playAgain() {
-    const audio = new Audio(audioPath + "start.mp3");
-    audio.play();
+    new Audio(audioPath + "start.mp3").play();
     resetGame();
     createGame();
 }
 
 function getResult(text, scoreAdd) {
     if (scoreAdd === "tie") {
-        var audio = new Audio(audioPath + "tie.mp3");
+        new Audio(audioPath + "tie.mp3").play();
     } else {
-        var audio = new Audio(audioPath + "win.mp3");
+        new Audio(audioPath + "win.mp3").play();
     }
-    audio.play();
     turn.innerHTML = "Game Ended!";
     resultText.innerHTML = text;
     result.style.display = "flex";
@@ -147,8 +145,7 @@ function squareClick(event) {
     }
 
     event.currentTarget.style.backgroundColor = "#181818";
-    const audio = new Audio(audioPath + currentPlayer + ".mp3");
-    audio.play();
+    new Audio(audioPath + currentPlayer + ".mp3").play();
     event.currentTarget.innerHTML =
         currentPlayer === "x"
             ? `<span class="x first"></span><span class="x second"></span>`
