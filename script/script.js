@@ -40,8 +40,12 @@ const result = document.querySelector(".result");
 const resultText = document.querySelector("h2");
 const replay = document.querySelector(".again");
 const reset = document.querySelector(".reset");
+const replaySecond = document.getElementById("again");
+const resetSecond = document.getElementById("reset");
 replay.onclick = playAgain;
+replaySecond.onclick = playAgain;
 reset.onclick = resetScore;
+resetSecond.onclick = resetScore;
 
 function createGame() {
     for (let i = 1; i <= 9; i++) {
@@ -100,6 +104,8 @@ function resetGame() {
     squares = [];
     tieCounter = 0;
     gameEnded = false;
+    replaySecond.style.opacity = 1;
+    resetSecond.style.opacity = 1;
 }
 
 function playAgain() {
@@ -119,6 +125,8 @@ function getResult(text, scoreAdd) {
     squares.forEach((value) => (value.tabIndex = -1));
     updateScore();
     gameEnded = true;
+    replaySecond.style.opacity = 0;
+    resetSecond.style.opacity = 0;
 }
 
 function checkGame() {

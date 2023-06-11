@@ -93,13 +93,13 @@ button {
 }
 
 .again:hover,
-.again:focus {
+.again:focus-visible {
     background-color: #00599f;
     box-shadow: none;
 }
 
 .reset:hover,
-.reset:focus {
+.reset:focus-visible {
     background-color: #6f0000;
     box-shadow: none;
 }
