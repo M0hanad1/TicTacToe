@@ -114,7 +114,6 @@ button {
     display: grid;
     background-color: #181818;
     height: 100%;
-    margin: auto;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     border: 3px solid black;
@@ -186,6 +185,21 @@ button {
     border-color: whitesmoke !important;
 }
 
+.credits {
+    position: absolute;
+    bottom: 10px;
+    font-size: small;
+    color: #181818;
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+}
+
+.name {
+    text-transform: uppercase;
+    color: whitesmoke;
+    letter-spacing: 2px;
+}
+
 @media (max-width: 539px) {
     .game {
         height: 400px;
@@ -252,6 +266,9 @@ button {
     .game {
         height: 250px;
         width: 250px;
+    }
+    .credits {
+        font-size: x-small;
     }
 }
 

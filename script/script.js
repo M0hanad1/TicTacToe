@@ -42,6 +42,7 @@ const replay = document.querySelector(".again");
 const reset = document.querySelector(".reset");
 const replaySecond = document.getElementById("again");
 const resetSecond = document.getElementById("reset");
+document.querySelector(".year").textContent = new Date().getFullYear();
 replay.onclick = playAgain;
 replaySecond.onclick = playAgain;
 reset.onclick = resetScore;
