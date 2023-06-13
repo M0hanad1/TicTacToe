@@ -170,6 +170,22 @@ button {
     color: var(--tie-color);
 }
 
+[player="x"].win {
+    background-color: var(--x-color) !important;
+}
+
+[player="x"].win > * {
+    background-color: whitesmoke !important;
+}
+
+[player="o"].win {
+    background-color: var(--o-color) !important;
+}
+
+[player="o"].win > * {
+    border-color: whitesmoke !important;
+}
+
 @media (max-width: 539px) {
     .game {
         height: 400px;

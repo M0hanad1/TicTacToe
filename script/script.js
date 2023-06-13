@@ -67,7 +67,11 @@ function createGame() {
         };
         // prettier-ignore
         square.onfocus = () => (square.style.backgroundColor = getComputedStyle(document.body).getPropertyValue(`--${currentPlayer}-color`));
-        square.onmouseleave = () => (square.style.backgroundColor = "#181818");
+        square.onmouseleave = () => {
+            if (!square.classList.contains("win")) {
+                square.style.backgroundColor = "#181818";
+            }
+        };
         square.onblur = () => (square.style.backgroundColor = "#181818");
         squares.push(square);
         game.appendChild(square);
@@ -132,9 +136,10 @@ function getResult(text, scoreAdd) {
 function checkGame() {
     winPositions.forEach((position) => {
         let currentPositions = [];
+        position.forEach((value) => currentPositions.push(squares[value]));
         // prettier-ignore
-        position.forEach((value) => currentPositions.push(squares[value].getAttribute("player")));
-        if (currentPositions.every((value) => value === currentPlayer)) {
+        if (currentPositions.every((value) => value.getAttribute("player") === currentPlayer)) {
+            currentPositions.forEach((value) => value.classList.add("win"));
             return getResult(
                 `Player <span class=${currentPlayer}-text>${currentPlayer}</span> won!`,
                 currentPlayer
